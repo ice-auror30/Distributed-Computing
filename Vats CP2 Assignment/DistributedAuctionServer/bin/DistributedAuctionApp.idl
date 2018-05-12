@@ -1,0 +1,29 @@
+module DistributedAuctionApp{
+	interface DistributedAuction{
+		exception IncorrectOfferException{
+		string description;
+		};
+		exception IncorrectSellException{
+		string description;
+		};
+		exception IncorrectStatusException{
+		string description;
+		};
+		exception IncorrectBidException{
+		string description;
+		};
+
+	typedef struct AuctionStatus{
+		string userID;
+		string itemName;
+		double bidPrice;
+	} Status;
+	
+	boolean offerItem(in string itemName, in string userID, in double startPrice) raises (IncorrectOfferException);
+	string viewHighBidder(in string userID) raises (IncorrectSellException);
+	Status viewAuctionStatus(in string userID) raises (IncorrectStatusException);
+	string viewBidStatus(in string userID) raises (IncorrectBidException);
+	boolean bid(in string userID, in double price) raises (IncorrectBidException);
+	boolean sell(in string userID) raises(IncorrectSellException);
+	};
+};
